@@ -26,13 +26,13 @@ def handlesignup(request):
 
         if error == True:
             messages.error(request, "Invalid credentials")
-            return redirect('home')
+            return redirect('onlinecourse')
 
         # Create the user
         myuser = User.objects.create_user(username, email, pass1)
         myuser.save()
         messages.success(request,  "Your account created successfully")
-        return redirect('home')
+        return redirect('onlinecourse')
 
     else:
         return HttpResponse("404 - Not found")
@@ -48,10 +48,10 @@ def handlelogin(request):
         if user is not None:
             dlogin(request, user)
             messages.success(request, "You are loggedin successfully")
-            return redirect('home')
+            return redirect('onlinecourse')
         else:         
             messages.error(request, "invalid credentials")
-            return redirect('home')
+            return redirect('onlinecourse')
 
     else:
         return HttpResponse("404 - Not found")
@@ -60,4 +60,4 @@ def handlelogin(request):
 def handlelogout(request):
     logout(request)
     messages.success(request, "Successfully logged out")
-    return redirect('home') 
+    return redirect('onlinecourse') 

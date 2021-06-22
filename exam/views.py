@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
-def home(request):
+def onlinecourse(request):
     subjects = Subject.objects.all()
     params = {'subjects': subjects}
     return render(request,'home.html',params)
