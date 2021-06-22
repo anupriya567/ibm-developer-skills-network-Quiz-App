@@ -10,8 +10,6 @@ from django.contrib.auth.decorators import login_required
 
 def home(request):
     subjects = Subject.objects.all()
-    print(subjects)
-
     params = {'subjects': subjects}
     return render(request,'home.html',params)
 
@@ -35,7 +33,7 @@ def quiz(request,id):
             answer = request.POST.get(pname)
             if answer == None:
                 notfilled.append(int (question.quesid))
-            print(notfilled)
+            
 
             objt = Option.objects.filter(opid= answer)
             for obj in objt:
@@ -63,8 +61,6 @@ def quiz(request,id):
     params = {'questions': questions,'options':options,'result':result,'score':score}
     return render(request,'quiz.html',params)
 
-def check(request):
-    return HttpResponse("check")
 
 @login_required
 def submissions(request):
