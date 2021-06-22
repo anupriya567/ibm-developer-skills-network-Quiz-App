@@ -25,9 +25,8 @@
             <div class="card" style="width: 18rem;">
              
               <div class="card-body">
-                <h5 class="card-title">{{subject.name}}</h5>
-                <p class="card-text"> {{subject.description}}</p>
-                
+                <img src="/media/{{subject.image}}" class="card-img-top" alt="..." width="200px" height="300px">
+                <h5 class="card-title">{{subject.name}}</h5>              
                 {% if user.is_authenticated %}
                 <a href="{% url 'quiz' subject.subid %}" class="btn btn-primary">START</a>
                 {% else %}
