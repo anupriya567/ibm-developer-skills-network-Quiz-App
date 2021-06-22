@@ -1,0 +1,48 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}
+    <title>result</title>
+    {% endblock  %}
+{% block subactive%} active {% endblock%}
+
+{% block body %}
+   <div class="container">
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">{{user.username|title}}'s Scoreboard</h1>
+            <p class="lead text-muted">View all your performance record here.</p>
+            
+          </div>
+        </div>
+      </section>
+   
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">SNo.</th>
+            <th scope="col">Score</th>
+            <th scope="col">Time</th>
+           
+          </tr>
+        </thead>
+        <tbody>
+
+            
+            {% for  res in result  %}
+            <tr>
+                <th scope="row">{{forloop.counter}}.</th>
+                <td>{{res.score}}</td>
+                <td>{{res.time}}</td>
+                
+            </tr> 
+            {% endfor %}
+                
+          
+        </tbody>
+      </table>
+   
+   </div>
+{% endblock  %}
+
+

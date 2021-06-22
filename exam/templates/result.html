@@ -1,0 +1,60 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}
+    <title>result</title>
+    {% endblock  %}
+
+
+{% block body %}
+   <div class="container">
+
+    <h1 class="my-4 center mceter">Submission Results</h1>
+    
+    
+    {% if score < questions|length   %}
+    <div class="alert alert-danger" role="alert">
+        You Failed! Your score is {{score}}. Want to take a <a href="{%url 'quiz' id%}"> RETEST</a>
+    </div>
+    {% else %} 
+    <div class="alert alert-success" role="alert">
+        You Passed Congratulations! Your score is {{score}}
+    </div>
+
+    {% endif %}
+        
+    <br>
+    
+    {% for quest in questions %}
+      <div class="question">
+        <div class="alert alert-secondary" role="alert">
+          {{quest.quesid}}) {{quest.questext}}
+        </div> 
+
+        {% for option in options %}      
+        
+            {% if option.question.quesid == quest.quesid   %}
+                {% if option.is_correct  %}
+                    <div class="correctans">Correct answer: {{option.opttext}}</div>
+                {% endif %}
+
+                {% if  option.opid in allanswer  %}  
+                  
+                  {% if option.is_correct  %}
+                   <div class="correctans">Your choice: {{option.opttext}} (correct)</div>
+                   {% else %}
+                   <div class="wrongans">Your choice: {{option.opttext}} (wrong)</div>
+                  {% endif %}
+                   
+                {% endif %}
+
+            {% endif %}
+        {% endfor %}
+        <br>
+      </div>
+    {% endfor %}
+
+    
+   </div>
+{% endblock  %}
+
+

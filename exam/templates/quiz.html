@@ -1,0 +1,88 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %}
+    <title>home</title>
+    {% endblock  %}
+{% block body %}
+    
+<!-- all questions display -->
+<div class="container">
+    <h1 class="my-4 center mceter"> Quiz Challenge</h1>
+    <h3 class="hcenter">{{user.username|title}} get ready for quiz</h3>
+    <br>
+    <h4>Read Questions carefully. There can be multiple correct choices to a question</h4>
+    
+    {% for quest in questions %}
+      <div class="question">
+        <div class="alert alert-secondary" role="alert">
+          {{forloop.counter}}) {{quest.questext}}
+        </div> 
+        <div class="questionin">
+        {% if  quest.quesid in wrongques or quest.quesid in notfilled  %} 
+        <button type="button" class="btn btn-dark">0/{{quest.points}}point</button>
+        {% endif %}
+        {% if quest.quesid not in wrongques and result and quest.quesid not in notfilled  %}
+            <button type="button" class="btn btn-dark">1/{{quest.points}}point</button>
+        {% endif %}
+        </div>
+      </div>
+
+    {% for option in options %}      
+      {% if option.question.quesid == quest.quesid %}
+ 
+      <form method="post">
+        {% csrf_token %}
+          
+          {% if result %}
+              {% if option.is_correct %}
+              
+              <div class="alert alert-success " role="alert">
+                {{option.opttext}}<span class="ppoints">Correct Answer</span>
+                <input class="form-check-input" type="radio" name="flexRadioDefault{{quest.quesid}}" value="{{option.opid}}"  hidden>
+                </div>
+
+              {% else %}
+                {% if option.opid in wrongans %}  
+                  
+                  <div class="alert alert-danger dalert" role="alert">
+                  {{option.opttext}}<span class="ppoints">Wrong Answer</span>
+                  </div>
+                  
+                {% else %}
+               
+                  <input class="form-check-input" type="radio" value="{{option.opid}}" name="flexRadioDefault{{quest.quesid}}"  disabled>
+                  {{option.opttext}}
+                  {% endif %}
+                <br>
+                {% endif %}
+
+          {% else %}
+              <input class="form-check-input" type="radio" value="{{option.opid}}" name="flexRadioDefault{{quest.quesid}}" id="flexRadioDefault1">
+              {{option.opttext}} 
+              <br>
+        
+          {% endif %}
+        {% endif %}
+    {% endfor %}
+    <br>
+  {% endfor %}
+  
+  
+  {% if score >= 0 %} 
+  <button type="button" class="btn btn-success my-2"><a href="{% url 'result' subid%}" class="anchor">View Results</a></button>
+  {% endif %}
+    
+  
+  <div class="d-grid gap-2">
+      <button class="btn btn-primary mb-4" id="sbuttton" type="submit">Submit</button>
+
+    </div>
+  </form>    
+
+</div>
+{% endblock  %}
+
+
+
+
+

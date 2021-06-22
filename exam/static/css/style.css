@@ -1,0 +1,62 @@
+
+.anchor
+{
+  text-decoration: none;
+  color: black;
+}
+/* quiz.html */
+.question{
+    position:relative;
+}
+.questionin {
+    position: absolute;
+    top: 5px;
+    right: -100px;
+}
+.ppoints
+{
+    position: absolute;
+    right: 20px;
+    
+}
+.points
+{
+    position: absolute;
+    right: 20px;
+    
+}
+.dalert {
+    margin-bottom: -17px;
+}
+
+.hcenter {
+       
+text-align: center;
+color: blue;
+}
+.mceter {
+    color:rgb(23, 14, 61);
+    text-align: center;
+}
+
+/* footer */
+
+.ftext {
+    text-align: center;
+}
+
+.bfooter {
+    position: relative;
+    top: 100px;
+    
+}
+
+/* result */
+
+.correctans{
+    color:green;
+}
+
+.wrongans{
+    color:red;
+}
