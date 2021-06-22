@@ -7,7 +7,7 @@ class Subject(models.Model):
     name = models.CharField(max_length=200)
     subid = models.AutoField(primary_key= True)
     description = models.TextField(max_length=200,blank=True)
-    image = models.ImageField(upload_to='subject/images', default="")
+    image = models.ImageField(upload_to='course/images', default="")
     
     def __str__(self):  
         return self.name
