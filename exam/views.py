@@ -30,6 +30,7 @@ def quiz(request,id):
         wrongques = []
         allanswer = []
         notfilled = []
+        correctans = []
         for question in questions:
             pname = "flexRadioDefault" + str(question.quesid)
             answer = request.POST.get(pname)
@@ -44,6 +45,7 @@ def quiz(request,id):
                 allanswer.append(obj.opid)
 
                 if obj.is_correct == True:
+                    correctans.append(int(answer)) 
                     score = score+int(question.points)
                 else:
                 
@@ -62,7 +64,7 @@ def quiz(request,id):
         global total_scoref
         def total_scoref():
             return total_score    
-        params = {'questions': questions,'options':options,'result':result,'score':score,'wrongans':wrongans,'wrongques': wrongques,'subid':id, 'notfilled':notfilled }        
+        params = {'questions': questions,'options':options,'result':result,'score':score,'correctans':correctans,'wrongans':wrongans,'wrongques': wrongques,'subid':id, 'notfilled':notfilled }        
         return render(request,'quiz.html',params)
 
     params = {'questions': questions,'options':options,'result':result,'score':score}

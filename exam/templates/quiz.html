@@ -34,14 +34,14 @@
         {% csrf_token %}
           
           {% if result %}
-              {% if option.is_correct %}
+              {% if option.opid in correctans %}
               
               <div class="alert alert-success " role="alert">
                 {{option.opttext}}<span class="ppoints">Correct Answer</span>
                 <input class="form-check-input" type="radio" name="flexRadioDefault{{quest.quesid}}" value="{{option.opid}}"  hidden>
                 </div>
-
-              {% else %}
+              {% endif%}
+              
                 {% if option.opid in wrongans %}  
                   
                   <div class="alert alert-danger dalert" role="alert">
@@ -60,8 +60,6 @@
               <input class="form-check-input" type="radio" value="{{option.opid}}" name="flexRadioDefault{{quest.quesid}}" id="flexRadioDefault1">
               {{option.opttext}} 
               <br>
-        
-          {% endif %}
         {% endif %}
     {% endfor %}
     <br>
