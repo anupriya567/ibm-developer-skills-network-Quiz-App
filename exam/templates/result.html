@@ -10,14 +10,14 @@
 
     <h1 class="my-4 center mceter">Submission Results</h1>
     
-    <h3 class="my-4 center mceter">Your Score is: {{score}}</h3>
-    {% if score < total_score   %}
+    <h3 class="my-4 center mceter">Your Score is: {{score}}/{{total_score}}</h3>
+    {% if score < mini   %}
     <div class="alert alert-danger" role="alert">
         You Failed! Your score is less than 50%. Want to take a <a href="{%url 'quiz' id%}"> RETEST</a>
     </div>
     {% else %} 
     <div class="alert alert-success" role="alert">
-        You Passed Congratulations! Your score is {{score}}
+        You Passed Congratulations! Your score is {{score}}/{{total_score}}
     </div>
 
     {% endif %}

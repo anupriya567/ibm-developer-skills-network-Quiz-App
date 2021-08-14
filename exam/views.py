@@ -84,9 +84,9 @@ def result(request,id):
     score = scoref()
     total_score = total_scoref()
     # print(total_score)
-    total_score = total_score * 0.5
+    mini = total_score * 0.5
     # print(total_score)
    
     # print(allanswer)
-    params = {'questions': questions,'options':options , 'allanswer':allanswer,'score':score,'id':id,'total_score':total_score}
+    params = {'questions': questions,'options':options , 'allanswer':allanswer,'score':score,'mini':mini,'id':id,'total_score':total_score}
     return render(request,'result.html',params)   
