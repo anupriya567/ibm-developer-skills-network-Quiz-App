@@ -10,10 +10,10 @@
 
     <h1 class="my-4 center mceter">Submission Results</h1>
     
-    
-    {% if score < questions|length   %}
+    <h3 class="my-4 center mceter">Your Score is: {{score}}</h3>
+    {% if score < total_score   %}
     <div class="alert alert-danger" role="alert">
-        You Failed! Your score is {{score}}. Want to take a <a href="{%url 'quiz' id%}"> RETEST</a>
+        You Failed! Your score is less than 50%. Want to take a <a href="{%url 'quiz' id%}"> RETEST</a>
     </div>
     {% else %} 
     <div class="alert alert-success" role="alert">

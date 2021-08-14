@@ -22,7 +22,7 @@
         <button type="button" class="btn btn-dark">0/{{quest.points}}point</button>
         {% endif %}
         {% if quest.quesid not in wrongques and result and quest.quesid not in notfilled  %}
-            <button type="button" class="btn btn-dark">1/{{quest.points}}point</button>
+            <button type="button" class="btn btn-dark">{{quest.points}}/{{quest.points}}point</button>
         {% endif %}
         </div>
       </div>

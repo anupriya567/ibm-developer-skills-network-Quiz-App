@@ -15,6 +15,7 @@ def onlinecourse(request):
 
 fun1 = None
 scoref = None
+total_scoref = None
 def quiz(request,id):      
     questions = Question.objects.filter(subject=id)
     options = Option.objects.filter(question__subject__subid = id)
@@ -24,6 +25,7 @@ def quiz(request,id):
 
         result = True
         score = 0
+        total_score = 0
         wrongans = []
         wrongques = []
         allanswer = []
@@ -31,6 +33,8 @@ def quiz(request,id):
         for question in questions:
             pname = "flexRadioDefault" + str(question.quesid)
             answer = request.POST.get(pname)
+
+            total_score = total_score + int(question.points)
             if answer == None:
                 notfilled.append(int (question.quesid))
             
@@ -40,7 +44,7 @@ def quiz(request,id):
                 allanswer.append(obj.opid)
 
                 if obj.is_correct == True:
-                    score = score+1
+                    score = score+int(question.points)
                 else:
                 
                     wrongans.append(int(answer)) 
@@ -55,6 +59,9 @@ def quiz(request,id):
         global scoref
         def scoref():
             return score
+        global total_scoref
+        def total_scoref():
+            return total_score    
         params = {'questions': questions,'options':options,'result':result,'score':score,'wrongans':wrongans,'wrongques': wrongques,'subid':id, 'notfilled':notfilled }        
         return render(request,'quiz.html',params)
 
@@ -73,6 +80,11 @@ def result(request,id):
     options = Option.objects.filter(question__subject__subid = id) 
     allanswer = fun1()
     score = scoref()
+    total_score = total_scoref()
+    # print(total_score)
+    total_score = total_score * 0.5
+    # print(total_score)
+   
     # print(allanswer)
-    params = {'questions': questions,'options':options , 'allanswer':allanswer,'score':score,'id':id}
+    params = {'questions': questions,'options':options , 'allanswer':allanswer,'score':score,'id':id,'total_score':total_score}
     return render(request,'result.html',params)   
